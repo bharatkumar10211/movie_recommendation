@@ -62,12 +62,12 @@ button[kind="header"] {
     padding-bottom: 0 !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
-    max-width: 100% !important;
+    max-width: none !important;
 }
 
 .main .block-container {
     padding: 0 !important;
-    max-width: 100% !important;
+    max-width: none !important;
 }
 
 /* -- Restore sensible vertical rhythm ------------- */
@@ -87,7 +87,7 @@ section[data-testid="stSidebar"],
 ================================================== */
 .pg {
     width: 100% !important;
-    max-width: 1320px !important; /* Desktop max content width: 1280px–1400px centered */
+    max-width: 1280px !important;
     margin: 0 auto !important;
     padding: 0px 32px 32px !important; /* Desktop default padding: 32px */
     transition: padding 0.2s ease;
@@ -187,28 +187,21 @@ div.st-key-topnav [role="radiogroup"] label:has(input:checked) {
     overflow: visible !important;
 }
 
-/* Target the first horizontal block (our header columns) */
-[data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:first-of-type {
+/* Dedicated class style for top_header container using :has selector */
+[data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:has(div.st-key-topnav) {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
     background: #FFFFFF !important;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
     border-bottom: 1.5px solid #E2E8F0 !important;
-    padding-top: 8px !important;
-    padding-bottom: 4px !important;
-    margin-left: -32px !important;
-    margin-right: -32px !important;
-    padding-left: 32px !important;
-    padding-right: 32px !important;
+    padding: 10px 28px 8px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
     transition: all 0.2s ease;
 }
 
-/* Kill any gap ABOVE the first element so the header truly starts at y=0 */
-[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div:first-child {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
 /* Also zero out the gap Streamlit adds before the first stVerticalBlock child */
 [data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] {
     padding-top: 0 !important;
@@ -226,8 +219,7 @@ div.st-key-toggle_pb {
 div.st-key-toggle_cb button,
 div.st-key-toggle_pb button {
     height: 42px !important;
-    width: 380px !important; /* Desktop default toggle width: 380px */
-    max-width: 100% !important;
+    width: min(320px, 100%) !important;
     border-radius: 8px !important;
     font-size: 0.84rem !important;
     font-weight: 600 !important;
@@ -296,12 +288,12 @@ div.st-key-toggle_pb button[kind="secondary"]:hover {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    width: fit-content;
-    max-width: 850px;
+    width: fit-content !important;
+    max-width: 820px !important;
     background: #EFF6FF;
     border: 1px solid #BFDBFE;
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 10px 28px !important;
     color: #1E40AF;
     font-size: 0.80rem;
     font-weight: 500;
@@ -323,14 +315,14 @@ div[data-testid="stVerticalBlockBorder"] {
     border-radius: 14px !important; /* Unified border-radius: 14px */
     padding: 0 !important; /* Zero padding on container */
     box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
-    margin-bottom: 14px !important;
-    margin-top: 14px !important;
+    margin-bottom: 18px !important;
+    margin-top: 18px !important;
     overflow: hidden !important;
 }
 
 /* Card inner content padding */
 div[data-testid="stVerticalBlockBorder"] > div[data-testid="stVerticalBlock"] > div:not(:first-child) {
-    padding: 18px 20px 20px 20px !important;
+    padding: 22px 24px !important;
 }
 
 /* Card section heading */
@@ -457,7 +449,7 @@ div.st-key-btn_pb button:hover {
     background: #FFFFFF;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-.tbl-body { overflow-x: auto !important; overflow-y: auto; max-height: 250px; }
+.tbl-body { overflow-x: auto !important; overflow-y: auto; max-height: 320px !important; }
 .tbl-body::-webkit-scrollbar { width: 5px; height: 5px; }
 .tbl-body::-webkit-scrollbar-track { background: #F9FAFB; }
 .tbl-body::-webkit-scrollbar-thumb { background: #C7D2FE; border-radius: 6px; }
@@ -471,11 +463,11 @@ table.mrt {
 }
 
 .mrt-content {
-    min-width: 800px;
+    min-width: 100%;
 }
 
 .mrt-popular {
-    min-width: 950px;
+    min-width: 100%;
 }
 
 /* Scoped Column Width Constraints to prevent collapsing/overlaps */
@@ -607,32 +599,12 @@ table.mrt td.ovw {
     .pg {
         padding: 0px 24px 24px !important; /* Laptop padding: 24px */
     }
-    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:first-of-type {
-        margin-left: -24px !important;
-        margin-right: -24px !important;
-        padding-left: 24px !important;
-        padding-right: 24px !important;
-    }
-    div.st-key-toggle_cb button,
-    div.st-key-toggle_pb button {
-        width: 320px !important; /* Laptop toggle buttons: 320px */
-    }
 }
 
 /* Tablet (768px - 1199px) */
 @media (max-width: 1199px) {
     .pg {
         padding: 0px 20px 20px !important; /* Tablet padding: 20px */
-    }
-    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:first-of-type {
-        margin-left: -20px !important;
-        margin-right: -20px !important;
-        padding-left: 20px !important;
-        padding-right: 20px !important;
-    }
-    div.st-key-toggle_cb button,
-    div.st-key-toggle_pb button {
-        width: 280px !important; /* Tablet toggle buttons: 280px */
     }
     /* Let the controls wrap if tight */
     div[data-testid="stVerticalBlockBorder"] [data-testid="stHorizontalBlock"] {
@@ -647,16 +619,11 @@ table.mrt td.ovw {
         padding: 0px 16px 16px !important; /* Mobile padding: 16px */
     }
     /* Sticky Header Layout for Mobile */
-    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:first-of-type {
+    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:has(div.st-key-topnav) {
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 10px !important;
-        padding-top: 10px !important;
-        padding-bottom: 8px !important;
-        margin-left: -16px !important;
-        margin-right: -16px !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        padding: 10px 16px 8px !important;
     }
     .brand-title {
         font-size: 1.35rem;
@@ -699,7 +666,7 @@ table.mrt td.ovw {
         height: 38px !important;
     }
     /* Let the toggle buttons horizontal block layout flow vertically */
-    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:nth-of-type(2) {
+    [data-testid="stMainBlockContainer"] [data-testid="stHorizontalBlock"]:has(div.st-key-toggle_cb) {
         flex-direction: column !important;
         gap: 10px !important;
     }
@@ -733,9 +700,6 @@ table.mrt td.ovw {
 }
 </style>
 """, unsafe_allow_html=True)
-
-
-
 
 # ── Data ──────────────────────────────────────────────────────────────────────
 @st.cache_data
